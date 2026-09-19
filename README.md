@@ -46,6 +46,16 @@ Recorded result: **6/6 expected statuses matched** (three passed, three correcte
 
 The checker distinguished the 14-day request deadline from the 30-day shipping window and rechecked the correction.
 
+## Key decisions and why
+
+I deliberately kept FactGuard to one narrow task: answering questions from a supplied refund policy, and one failure type: fabricated factual claims. I chose this failure because policy answers can sound confident while confusing similar deadlines, conditions, fees, or exceptions.
+
+I kept factuality separate from completeness and relevance. A true but evasive answer can therefore pass; adding another checker would expand the project beyond the single failure type I chose to evaluate.
+
+I added one recheck after a correction because a model-generated fix should not automatically be trusted. If that repair fails verification, or if the verifier returns malformed or inconsistent output, FactGuard withholds the answer instead of repeatedly retrying.
+
+For reproducible evaluation, I use controlled fault-injection drafts alongside normal live Gemini generation. This lets me test specific plausible mistakes consistently without presenting planted errors as spontaneous model failures.
+
 ## Where AI failed
 
 The real verifier initially called a source-supported but irrelevant sentence a fabricated fact. I caught it by comparing the claim with the source and preserving the failing result, then explicitly limited the checker to assertions actually made. See [FAILURE.md](FAILURE.md) for the original output, fix, and remaining weakness. My AI-assisted implementation also initially chose an incompatible Gemini schema option; the live run caught this while offline mocked tests passed.
