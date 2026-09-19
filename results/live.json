@@ -1,0 +1,166 @@
+{
+  "recorded_at": "2026-09-18T19:05:43.911215+00:00",
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "id": "supported",
+      "source": "Unused items may be returned within 30 days of delivery with a receipt.",
+      "question": "When can I return an unused item?",
+      "expected": "passed",
+      "draft": null,
+      "draft_origin": "live Gemini generation",
+      "result": {
+        "draft": "You can return an unused item within 30 days of delivery, provided you have a receipt.",
+        "check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "repair_check": null,
+        "final_answer": "You can return an unused item within 30 days of delivery, provided you have a receipt.",
+        "status": "passed"
+      },
+      "matches_expected_status": true
+    },
+    {
+      "id": "unknown",
+      "source": "Unused items may be returned within 30 days of delivery with a receipt.",
+      "question": "How much is the restocking fee?",
+      "expected": "passed",
+      "draft": null,
+      "draft_origin": "live Gemini generation",
+      "result": {
+        "draft": "The policy does not say.",
+        "check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "repair_check": null,
+        "final_answer": "The policy does not say.",
+        "status": "passed"
+      },
+      "matches_expected_status": true
+    },
+    {
+      "id": "plausible_wrong_deadline",
+      "source": "Return requests must be submitted within 14 days of delivery. After approval, customers have 30 days to ship the item back.",
+      "question": "How long after delivery do I have to request a return?",
+      "expected": "corrected",
+      "draft": "You have 30 days after delivery to request a return.",
+      "draft_origin": "controlled AI-authored fixture (fault injection)",
+      "result": {
+        "draft": "You have 30 days after delivery to request a return.",
+        "check": {
+          "passed": false,
+          "failure_type": "fabricated_fact",
+          "issues": [
+            {
+              "claim": "You have 30 days after delivery to request a return.",
+              "evidence": "Return requests must be submitted within 14 days of delivery.",
+              "reason": "The draft states the return request window is 30 days, whereas the policy explicitly states it must be within 14 days of delivery."
+            }
+          ],
+          "error": null
+        },
+        "repair_check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "final_answer": "You have 14 days after delivery to request a return.",
+        "status": "corrected"
+      },
+      "matches_expected_status": true
+    },
+    {
+      "id": "invented_fee",
+      "source": "Unused items may be returned within 30 days of delivery with a receipt.",
+      "question": "Is there a restocking fee?",
+      "expected": "corrected",
+      "draft": "Yes. A standard 15% restocking fee is deducted from your refund.",
+      "draft_origin": "controlled AI-authored fixture (fault injection)",
+      "result": {
+        "draft": "Yes. A standard 15% restocking fee is deducted from your refund.",
+        "check": {
+          "passed": false,
+          "failure_type": "fabricated_fact",
+          "issues": [
+            {
+              "claim": "A standard 15% restocking fee is deducted from your refund.",
+              "evidence": "",
+              "reason": "The policy does not mention any restocking fee; this claim is fabricated using outside knowledge."
+            }
+          ],
+          "error": null
+        },
+        "repair_check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "final_answer": "The policy does not mention whether there is a restocking fee.",
+        "status": "corrected"
+      },
+      "matches_expected_status": true
+    },
+    {
+      "id": "exception",
+      "source": "Most unused items can be returned within 30 days. Personalized items are final sale and cannot be returned, even if unused.",
+      "question": "Can I return an unused personalized mug within 30 days?",
+      "expected": "corrected",
+      "draft": "Yes, your unused personalized mug qualifies for a return within 30 days.",
+      "draft_origin": "controlled AI-authored fixture (fault injection)",
+      "result": {
+        "draft": "Yes, your unused personalized mug qualifies for a return within 30 days.",
+        "check": {
+          "passed": false,
+          "failure_type": "fabricated_fact",
+          "issues": [
+            {
+              "claim": "your unused personalized mug qualifies for a return within 30 days",
+              "evidence": "Personalized items are final sale and cannot be returned, even if unused.",
+              "reason": "The draft states that unused personalized items can be returned, which directly contradicts the policy stating they are final sale and cannot be returned even if unused."
+            }
+          ],
+          "error": null
+        },
+        "repair_check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "final_answer": "No, personalized items are final sale and cannot be returned, even if unused.",
+        "status": "corrected"
+      },
+      "matches_expected_status": true
+    },
+    {
+      "id": "known_blind_spot",
+      "source": "Unused items may be returned within 30 days. Return shipping is paid by the customer.",
+      "question": "Who pays for return shipping?",
+      "expected": "passed",
+      "draft": "Unused items may be returned within 30 days.",
+      "limitation": "True but evasive answer: factuality checking does not ensure the question was answered.",
+      "draft_origin": "controlled AI-authored fixture (fault injection)",
+      "result": {
+        "draft": "Unused items may be returned within 30 days.",
+        "check": {
+          "passed": true,
+          "failure_type": "fabricated_fact",
+          "issues": [],
+          "error": null
+        },
+        "repair_check": null,
+        "final_answer": "Unused items may be returned within 30 days.",
+        "status": "passed"
+      },
+      "matches_expected_status": true
+    }
+  ]
+}
